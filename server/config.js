@@ -33,6 +33,8 @@ const localWebSocketURL = getLocalWebSocketURL();
 
 const demoMode = args["demo"] || false;
 
+const dockerLogMaxLines = parseInt(args["docker-log-max-lines"] || process.env.KUMA_DOCKER_LOG_MAX_LINES || 500);
+
 module.exports = {
     args,
     hostname,

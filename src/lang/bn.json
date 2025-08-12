@@ -225,5 +225,7 @@
     "ignoreTLSError": "HTTPS ওয়েবসাইটগুলির জন্য TLS/SSL ত্রুটিগুলি উপেক্ষা করুন",
     "pushViewCode": "পুশ মনিটর কীভাবে ব্যবহার করবেন? (কোড দেখুন)",
     "Appearance": "দেখানোর ধরন",
-    "Quick Stats": "তাৎক্ষণিক পরিসংখ্যান"
+    "Quick Stats": "তাৎক্ষণিক পরিসংখ্যান",
+    "dockerLogLinesToFetch": "Lines to fetch",
+    "dockerLogLinesToFetchDescription": "Number of log lines to fetch from the container. Default is 500."
 }

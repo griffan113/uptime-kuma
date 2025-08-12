@@ -125,6 +125,7 @@ class Monitor extends BeanModel {
             dns_last_result: this.dns_last_result,
             docker_container: this.docker_container,
             docker_host: this.docker_host,
+            logLines: this.logLines,
             proxyId: this.proxy_id,
             notificationIDList: preloadData.notifications.get(this.id) || {},
             tags: preloadData.tags.get(this.id) || [],
@@ -763,6 +764,35 @@ class Monitor extends BeanModel {
                             bean.status = UP;
                             bean.msg = res.data.State.Health ? res.data.State.Health.Status : res.data.State.Status;
                         }
+
+                        // Fetch logs
+                        const logOptions = {
+                            ...options,
+                            url: `/containers/${this.docker_container}/logs`,
+                            params: {
+                                stdout: true,
+                                stderr: true,
+                                tail: this.logLines || 500,
+                            },
+                        };
+
+                        try {
+                            log.debug("monitor", `[${this.name}] Fetching Docker logs`);
+                            const logRes = await axios.request(logOptions);
+
+                            if (logRes.data) {
+                                const logBean = R.dispense("docker_log");
+                                logBean.monitor_id = this.id;
+                                logBean.log = logRes.data;
+                                await R.store(logBean);
+
+                                // Keep only the most recent 50 log entries
+                                await R.exec("DELETE FROM docker_log WHERE id IN (SELECT id FROM docker_log WHERE monitor_id = ? ORDER BY ts DESC LIMIT -1 OFFSET 50)", [this.id]);
+                            }
+                        } catch (logError) {
+                            log.warn("monitor", `[${this.name}] Failed to fetch Docker logs: ${logError.message}`);
+                        }
+
                     } else {
                         throw Error("Container State is " + res.data.State.Status);
                     }

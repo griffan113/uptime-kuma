@@ -325,6 +325,18 @@
                 </div>
             </transition>
 
+            <!-- Docker Logs -->
+            <div v-if="monitor.type === 'docker' && dockerLog" class="shadow-box big-padding">
+                <h3 class="mb-3">Logs</h3>
+                <div v-for="logEntry in dockerLog" :key="logEntry.ts" class="log-entry">
+                    <strong><Datetime :value="logEntry.ts" /></strong>
+                    <pre class="log-content">{{ logEntry.log }}</pre>
+                </div>
+                <div v-if="dockerLog.length === 0">
+                    <p>No logs found.</p>
+                </div>
+            </div>
+
             <!-- Ping Chart -->
             <div
                 v-if="showPingChartBox"
@@ -530,6 +542,7 @@ export default {
                 currentExample: "javascript-fetch",
                 code: "",
             },
+            dockerLog: null,
         };
     },
     computed: {
@@ -647,9 +660,17 @@ export default {
         "pushMonitor.currentExample"() {
             this.loadPushExample();
         },
+        lastHeartBeat() {
+            if (this.monitor && this.monitor.type === "docker") {
+                this.fetchDockerLog();
+            }
+        },
     },
 
     mounted() {
+        if (this.monitor && this.monitor.type === "docker") {
+            this.fetchDockerLog();
+        }
         this.getImportantHeartbeatListLength();
 
         this.$root.emitter.on(
@@ -930,6 +951,16 @@ export default {
         secondsToHumanReadableFormat(seconds) {
             return relativeTimeFormatter.secondsToHumanReadableFormat(seconds);
         },
+
+        fetchDockerLog() {
+            this.$root.getSocket().emit("getDockerLog", this.monitor.id, (res) => {
+                if (res.ok) {
+                    this.dockerLog = res.data;
+                } else {
+                    toast.error(res.msg);
+                }
+            });
+        },
     },
 };
 </script>
@@ -1095,5 +1126,26 @@ table {
     .dark & {
         opacity: 0.7;
     }
+}
+
+.log-entry {
+    margin-bottom: 15px;
+}
+
+.log-content {
+    background-color: #f5f5f5;
+    border: 1px solid #eee;
+    padding: 10px;
+    border-radius: 5px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 300px;
+    overflow-y: auto;
+    font-family: monospace;
+}
+
+.dark .log-content {
+    background-color: #2c3e50;
+    border-color: #3e5268;
 }
 </style>

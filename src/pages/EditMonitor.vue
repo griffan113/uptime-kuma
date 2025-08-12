@@ -469,6 +469,15 @@
                                 </div>
                             </div>
 
+                            <!-- For Docker Type -->
+                            <div v-if="monitor.type === 'docker'" class="my-3">
+                                <label for="logLines" class="form-label">{{ $t("Lines to fetch") }}</label>
+                                <input id="logLines" v-model="monitor.logLines" type="number" class="form-control" required min="1" max="10000">
+                                <div class="form-text">
+                                    {{ $t("The number of log lines to fetch from the container on each check.") }}
+                                </div>
+                            </div>
+
                             <!-- MQTT -->
                             <!-- For MQTT Type -->
                             <template v-if="monitor.type === 'mqtt'">
@@ -1203,6 +1212,7 @@ const monitorDefaults = {
     dns_resolve_server: "1.1.1.1",
     docker_container: "",
     docker_host: null,
+    logLines: 500,
     proxyId: null,
     mqttUsername: "",
     mqttPassword: "",

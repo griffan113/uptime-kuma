@@ -42,5 +42,7 @@
     "General Monitor Type": "جۆری مۆنیتەری گشتی",
     "DateTime": "رێکەوت",
     "Current": "هەنووکە",
-    "Monitor": "مۆنیتەر | مۆنیتەرەکان"
+    "Monitor": "مۆنیتەر | مۆنیتەرەکان",
+    "dockerLogLinesToFetch": "Lines to fetch",
+    "dockerLogLinesToFetchDescription": "Number of log lines to fetch from the container. Default is 500."
 }

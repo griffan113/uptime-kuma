@@ -24,6 +24,7 @@ It is a temporary live demo, all data will be deleted after 10 minutes. Sponsore
 ## ⭐ Features
 
 - Monitoring uptime for HTTP(s) / TCP / HTTP(s) Keyword / HTTP(s) Json Query / Ping / DNS Record / Push / Steam Game Server / Docker Containers
+- Fetch Docker container logs
 - Fancy, Reactive, Fast UI/UX
 - Notifications via Telegram, Discord, Gotify, Slack, Pushover, Email (SMTP), and [90+ notification services, click here for the full list](https://github.com/louislam/uptime-kuma/tree/master/src/components/notifications)
 - 20-second intervals
@@ -44,6 +45,12 @@ docker run -d --restart=always -p 3001:3001 -v uptime-kuma:/app/data --name upti
 ```
 
 Uptime Kuma is now running on <http://0.0.0.0:3001>.
+
+> [!NOTE]
+> You can override the default number of log lines to fetch for Docker monitors by setting the `KUMA_DOCKER_LOG_MAX_LINES` environment variable. For example:
+> ```bash
+> docker run -d --restart=always -p 3001:3001 -v uptime-kuma:/app/data -e KUMA_DOCKER_LOG_MAX_LINES=1000 --name uptime-kuma louislam/uptime-kuma:1
+> ```
 
 > [!WARNING]
 > File Systems like **NFS** (Network File System) are **NOT** supported. Please map to a local directory or volume.

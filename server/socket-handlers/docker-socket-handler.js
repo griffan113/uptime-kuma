@@ -2,6 +2,7 @@ const { sendDockerHostList } = require("../client");
 const { checkLogin } = require("../util-server");
 const { DockerHost } = require("../docker");
 const { log } = require("../../src/util");
+const { R } = require("redbean-node");
 
 /**
  * Handlers for docker hosts
@@ -73,6 +74,34 @@ module.exports.dockerSocketHandler = (socket) => {
         } catch (e) {
             log.error("docker", e);
 
+            callback({
+                ok: false,
+                msg: e.message,
+            });
+        }
+    });
+
+    socket.on("getDockerLog", async (monitorID, callback) => {
+        try {
+            checkLogin(socket);
+
+            // Check if the monitor exists and belongs to the user
+            const monitor = await R.findOne("monitor", "id = ? AND user_id = ?", [ monitorID, socket.userID ]);
+            if (!monitor) {
+                return callback({
+                    ok: false,
+                    msg: "Monitor not found or access denied."
+                });
+            }
+
+            const logRows = await R.getAll("SELECT ts, log FROM docker_log WHERE monitor_id = ? ORDER BY ts DESC", [ monitorID ]);
+
+            callback({
+                ok: true,
+                data: logRows
+            });
+
+        } catch (e) {
             callback({
                 ok: false,
                 msg: e.message,

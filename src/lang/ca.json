@@ -569,5 +569,7 @@
     "Messaging API": "API de missatges",
     "wayToGetLineChannelToken": "Primer accediu a {0}, creeu un proveïdor i un canal (API de missatgeria) i, a continuació, podeu obtenir el token d'accés al canal i l'identificador d'usuari dels elements del menú esmentats anteriorment.",
     "Icon URL": "URL de la icona",
-    "aboutIconURL": "Pots donar un enllaç a la imatge a \"URL de la icona\" per sobreposar-la a la imatge de perfil pere defecte. No s'usarà si hi ha una icona d'emoji establerta."
+    "aboutIconURL": "Pots donar un enllaç a la imatge a \"URL de la icona\" per sobreposar-la a la imatge de perfil pere defecte. No s'usarà si hi ha una icona d'emoji establerta.",
+    "dockerLogLinesToFetch": "Lines to fetch",
+    "dockerLogLinesToFetchDescription": "Number of log lines to fetch from the container. Default is 500."
 }

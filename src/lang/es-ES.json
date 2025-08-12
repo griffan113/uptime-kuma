@@ -1108,5 +1108,7 @@
     "smseagleApiv2": "APIv2 (recomendada para nuevas integraciones)",
     "templateServiceName": "Nombre del servicio",
     "templateHostnameOrURL": "Nombre del host o URL",
-    "templateStatus": "Estado"
+    "templateStatus": "Estado",
+    "dockerLogLinesToFetch": "Lines to fetch",
+    "dockerLogLinesToFetchDescription": "Number of log lines to fetch from the container. Default is 500."
 }

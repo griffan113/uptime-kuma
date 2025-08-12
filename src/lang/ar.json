@@ -761,5 +761,7 @@
     "Add a domain": "إضافة نطاق",
     "Remove domain": "إزالة النطاق '{0}'",
     "time ago": "منذ {0}",
-    "startDateTime": "تاريخ/وقت البدء"
+    "startDateTime": "تاريخ/وقت البدء",
+    "dockerLogLinesToFetch": "Lines to fetch",
+    "dockerLogLinesToFetchDescription": "Number of log lines to fetch from the container. Default is 500."
 }

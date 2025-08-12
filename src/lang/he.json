@@ -1,5 +1,4 @@
 {
-    "Help": "עזרה",
-    "languageName": "עברית",
-    "setupDatabaseChooseDatabase": "באיזה מסד נתונים אתה רוצה להשתמש?"
+    "dockerLogLinesToFetch": "Lines to fetch",
+    "dockerLogLinesToFetchDescription": "Number of log lines to fetch from the container. Default is 500."
 }

@@ -714,5 +714,7 @@
     "confirmUninstallPlugin": "هل أنت متأكد من أنك تريد إلغاء تثبيت هذا المكون الإضافي؟",
     "settingUpDatabaseMSG": "يرجى الإنتظار ، نقوم بإعداد قاعدة البيانات و قد يستغرق الأمر بعض الوقت.",
     "setupDatabaseChooseDatabase": "ما هي قاعدة البيانات التي تريد استخدامها؟",
-    "dbName": "إسم قاعدة البيانات"
+    "dbName": "إسم قاعدة البيانات",
+    "dockerLogLinesToFetch": "Lines to fetch",
+    "dockerLogLinesToFetchDescription": "Number of log lines to fetch from the container. Default is 500."
 }

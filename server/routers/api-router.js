@@ -628,4 +628,22 @@ function determineStatus(status, previousHeartbeat, maxretries, isUpsideDown, be
     }
 }
 
+router.get("/api/monitor/:id/docker-log", async (request, response) => {
+    try {
+        const monitorId = request.params.id;
+
+        // Check if the monitor exists and belongs to the user
+        const monitor = await R.findOne("monitor", "id = ? AND user_id = ?", [ monitorId, request.userID ]);
+        if (!monitor) {
+            return sendHttpError(response, "Monitor not found or access denied.");
+        }
+
+        const logRows = await R.getAll("SELECT ts, log FROM docker_log WHERE monitor_id = ? ORDER BY ts DESC", [ monitorId ]);
+
+        response.json(logRows);
+    } catch (error) {
+        sendHttpError(response, error.message);
+    }
+});
+
 module.exports = router;

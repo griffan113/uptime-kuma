@@ -1180,5 +1180,7 @@
     "Path": "Pfad",
     "mqttWebSocketPath": "MQTT WebSocket Pfad",
     "mqttWebsocketPathExplanation": "WebSocket-Pfad für MQTT über WebSocket-Verbindungen (z. B. /mqtt)",
-    "mqttHostnameTip": "Verwende dieses Format {hostnameFormat}"
+    "mqttHostnameTip": "Verwende dieses Format {hostnameFormat}",
+    "dockerLogLinesToFetch": "Lines to fetch",
+    "dockerLogLinesToFetchDescription": "Number of log lines to fetch from the container. Default is 500."
 }

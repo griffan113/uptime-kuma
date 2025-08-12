@@ -62,5 +62,7 @@
     "setupDatabaseSQLite": "'n Eenvoudige databasis leêr, aanbeveel vir klein-skaalse ontploiings. Voor weergawe 2.0.0 het Uptime Kuma SQLite as die verstekopsie.",
     "Primary Base URL": "Primêre Basis URL",
     "statusMaintenance": "Onderhoud",
-    "Passive Monitor Type": "Passiewe Monitor Tipe"
+    "Passive Monitor Type": "Passiewe Monitor Tipe",
+    "dockerLogLinesToFetch": "Lines to fetch",
+    "dockerLogLinesToFetchDescription": "Number of log lines to fetch from the container. Default is 500."
 }
